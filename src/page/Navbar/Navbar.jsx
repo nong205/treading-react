@@ -12,7 +12,7 @@ import {
   DragHandleHorizontalIcon,
   MagnifyingGlassIcon,
 } from '@radix-ui/react-icons'
-import { Avatar, AvatarImage } from '@radix-ui/react-avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar'
 import Sidebar from './Sidebar'
 
 const Navbar = () => {
@@ -59,6 +59,11 @@ const Navbar = () => {
             <span>Search</span>
           </Button>
         </div>
+      </div>
+      <div>
+        <Avatar>
+          <AvatarFallback>L</AvatarFallback>
+        </Avatar>
       </div>
     </div>
   )

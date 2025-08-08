@@ -1,6 +1,31 @@
-import React from 'react'
+import { Button } from '@/components/ui/button'
+import React, { useState } from 'react'
+import ReactApexChart from 'react-apexcharts'
+
+const timeSeries = [
+  {
+    keyword: 'DIGITAL_CURRENCY_DAILY',
+    key: 'Time Series (Daily)',
+    label: '1 Day',
+    value: 1,
+  },
+  {
+    keyword: 'DIGITAL_CURRENCY_WEEKLY',
+    key: 'Time Series (Weekly)',
+    label: '1 Week',
+    value: 7,
+  },
+  {
+    keyword: 'DIGITAL_CURRENCY_MONTHLY',
+    key: 'Time Series (Monthly)',
+    label: '1 Month',
+    value: 30,
+  },
+]
 
 const StockChart = () => {
+  const [activeLable, setActiveLable] = useState('1 Day')
+
   const searies = [
     {
       data: [
@@ -76,6 +101,7 @@ const StockChart = () => {
       type: 'datetime',
       tickAmount: 6,
     },
+    colors: ['#758AA2'],
     markers: {
       colors: ['#fff'],
       strokeColor: '#fff',
@@ -101,7 +127,33 @@ const StockChart = () => {
       show: true,
     },
   }
-  return <div id="chart-timelines"></div>
+
+  const handleActiveLable = (value) => {
+    setActiveLable(value)
+  }
+  return (
+    <div>
+      <div>
+        {timeSeries.map((item) => (
+          <Button
+            variant={activeLable == item.value ? '' : 'outline'}
+            onClick={() => handleActiveLable(item.value)}
+            key={item.label}
+          >
+            {item.label}
+          </Button>
+        ))}
+      </div>
+      <div id="chart-timelines">
+        <ReactApexChart
+          options={options}
+          series={searies}
+          type="area"
+          height={450}
+        />
+      </div>
+    </div>
+  )
 }
 
 export default StockChart
